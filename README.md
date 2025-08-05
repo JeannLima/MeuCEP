@@ -26,6 +26,7 @@ O projeto segue uma arquitetura em camadas:
 
 - `Repository Pattern`
 - Separação de responsabilidades (MVC-like)
+- `Interface-based Programming`: uso de interfaces (`ICepRepository`) para reduzir acoplamento e permitir testes
 
 ---
 

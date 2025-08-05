@@ -17,10 +17,11 @@
 
 O projeto segue uma arquitetura em camadas:
 
-- **Model**: representação da entidade `TCep`
-- **Controller**: gerencia lógica entre View e Repository
-- **Repository**: acesso a dados e persistência
-- **Service**: consumo da API ViaCEP
+-  **View** – formulário Delphi (`FmrMeuCEP`.)
+- **Controller**: - gerencia lógica entre View e Repository
+- **Repository** – abstrai o acesso ao banco de dados (implementação e interface)
+- **Model** – define a entidade `TCep`
+- **Component/Service** – realiza a integração com o WebService ViaCEP
 
 ### Patterns aplicados
 

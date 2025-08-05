@@ -1,30 +1,31 @@
 # MeuCEP
 
-**MeuCEP** é uma aplicação Delphi 12 que consome o WebService [ViaCEP](https://viacep.com.br/) para realizar buscas de endereços por CEP e vice-versa.
-Os dados podem ser salvos em um banco de dados SQL Server local e reaproveitados para consultas futuras.
-
+**MeuCEP** é uma aplicação desktop desenvolvida em **Delphi 12**, que consome o WebService [ViaCEP](https://viacep.com.br/) para realizar consultas de endereços a partir de CEPs e vice-versa. Os resultados são armazenados localmente em um banco de dados **SQL Server**, permitindo consultas futuras mesmo offline.
 ---
 
 ## Funcionalidades
 
-- Buscar endereço por CEP ou CEP por endereço
-- Armazenar resultados em banco de dados SQL Server
-- Atualizar dados manualmente através da API
-- Interface simples com grid de resultados
+- Consulta de CEP por endereço (UF/Cidade/Logradouro)
+- Consulta de endereço por CEP
+- Armazenamento dos resultados em banco de dados local
+- Atualização manual dos dados com base na API
+- Interface visual com grid para listagem
 
 ---
 
 ## Arquitetura
 
-- **Camadas**:
-  - `Controller`: lógica de orquestração entre view e dados
-  - `Repository`: acesso ao banco de dados
-  - `Model`: objetos de domínio (`TCep`)
-  - `Service/Component`: integração com API ViaCEP
+O projeto segue uma arquitetura em camadas:
 
-- **Patterns aplicados**:
-  - **Repository Pattern**
-  - **MVC (Model-View-Controller)**
+- **Model**: representação da entidade `TCep`
+- **Controller**: gerencia lógica entre View e Repository
+- **Repository**: acesso a dados e persistência
+- **Service**: consumo da API ViaCEP
+
+### Patterns aplicados
+
+- `Repository Pattern`
+- Separação de responsabilidades (MVC-like)
 
 ---
 
@@ -33,23 +34,33 @@ Os dados podem ser salvos em um banco de dados SQL Server local e reaproveitados
 - Delphi 12
 - FireDAC
 - SQL Server Express
-- ViaCEP REST API
-- Componentes nativos e `IdHTTP`
+- REST API ViaCEP
+- Componentes: `IdHTTP`, `TTaskDialog`, `TFDMemTable`
 
 ---
 
 ## Como executar
 
-1. **Clonar o projeto**  
+### Requisitos
+
+- Delphi 12 ou superior
+- SQL Server (Express ou completo)
+
+### Passos
+
+1. **Clone o repositório:**  
    ```bash
    git clone https://github.com/JeannLima/MeuCEP.git
 
+2. **Restaure o banco de dados:**
+ - Localize o arquivo Bd\MeuCEP.bak
+ - No SQL Server Management Studio:
+ - Clique com o botão direito em Databases > Restore Database
+ - Escolha Device > selecione o .bak
+ - Restaure com o nome MeuCEP
+
 2. **Abrir no Delphi (recomendado: Delphi 12 ou superior)**
  - Abra o arquivo MeuCEP.dproj.
-
-3. **Configurar o banco de dados SQL Server**
-
- - Restaure o banco de dados localizado na pasta MeuCEP\Bd\MeuCEP.bak
 
 4. **Executar**
  - Pressione F9 para compilar e executar.

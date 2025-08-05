@@ -49,9 +49,7 @@ Os dados podem ser salvos em um banco de dados SQL Server local e reaproveitados
 
 3. **Configurar o banco de dados SQL Server**
 
- - Crie o banco MeuCEP (o script pode ser encontrado na pasta scripts)
-
- - Configure a conexão no DmConexaoBD.pas
+ - Restaure o banco de dados localizado na pasta MeuCEP\Bd\MeuCEP.bak
 
 4. **Executar**
-Pressione F9 para compilar e executar.
+ - Pressione F9 para compilar e executar.

@@ -58,6 +58,7 @@ O projeto segue uma arquitetura em camadas:
  - Clique com o botão direito em Databases > Restore Database
  - Escolha Device > selecione o .bak
  - Restaure com o nome MeuCEP
+ - Importante: a conexão com o banco já está pré-configurada no código para acessar o banco MeuCEP no localhost. Basta restaurar o .bak com esse nome e garantir que o SQL Server esteja rodando localmente.
 
 2. **Abrir no Delphi (recomendado: Delphi 12 ou superior)**
  - Abra o arquivo MeuCEP.dproj.

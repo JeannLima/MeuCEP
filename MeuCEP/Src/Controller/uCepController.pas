@@ -17,7 +17,7 @@ type
       function BuscarNoBancoPorCep(const ACep: string): TList<TCep>;
       function BuscarNoBancoPorEndereco(const AEndereco: string): TList<TCep>;
 
-      function AtualizarCep(const ACep, AFormato: string): TList<TCep>;
+      procedure AtualizarCep(const ACep, AFormato: string);
       function AtualizarEndereco(const AEndereco, AFormato: string): TList<TCep>;
 
       function InserirCepNoBanco(const ACep, AFormato: string): TList<TCep>;
@@ -37,7 +37,6 @@ function TCepController.InserirCepNoBanco(const ACep, AFormato: string): TList<T
 var
   CepApi: TCep;
 begin
-  Result := nil;
   CepApi := FCepRepository.ConsultarCepViaApi(ACep, AFormato);
 
   if Assigned(CepApi) then
@@ -53,7 +52,6 @@ function TCepController.InserirEnderecoNoBanco(const AEndereco, AFormato: string
 var
   EnderecoApi: TList<TCep>;
 begin
-  Result := nil;
   EnderecoApi := FCepRepository.ConsultarEnderecoViaApi(AEndereco, AFormato);
 
   if Assigned(EnderecoApi) then
@@ -75,7 +73,7 @@ begin
   Result := FCepRepository.ObterTodos;
 end;
 
-function TCepController.AtualizarCep(const ACep, AFormato: string): TList<TCep>;
+procedure TCepController.AtualizarCep(const ACep, AFormato: string);
 var
   CepApi: TCep;
 begin

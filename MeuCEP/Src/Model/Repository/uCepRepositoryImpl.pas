@@ -5,7 +5,7 @@ interface
 uses
   System.Generics.Collections, FireDAC.Comp.Client,
   uCep, uCepRepository, System.SysUtils,
-  System.Classes, Data.DB, uViaCepComponent;
+  System.Classes, Data.DB, uViaCepComponent, FireDAC.Stan.Param;
 
 type
   TCepRepositoryImpl = class(TInterfacedObject, ICepRepository)
@@ -200,11 +200,11 @@ begin
   FQuery.Close;
   FQuery.SQL.Text := 'SELECT * FROM Ceps                                          '+
                      'WHERE uf COLLATE Latin1_General_CI_AI = :uf                 '+
-                     'AND localidade COLLATE Latin1_General_CI_AI = :cidade       '+
+                     'AND localidade COLLATE Latin1_General_CI_AI LIKE :cidade    '+
                      'AND logradouro COLLATE Latin1_General_CI_AI LIKE :logradouro';
 
   FQuery.ParamByName('uf').AsString         := UpperCase(UF);
-  FQuery.ParamByName('cidade').AsString     := UpperCase(Cidade);
+  FQuery.ParamByName('cidade').AsString     := '%' + UpperCase(Cidade) + '%';
   FQuery.ParamByName('logradouro').AsString := '%' + UpperCase(Logradouro) + '%';
   FQuery.Open;
 
@@ -233,7 +233,6 @@ end;
 function TCepRepositoryImpl.ConsultarEnderecoViaApi(const AEndereco, AFormato: string): TList<TCep>;
 var
   Lista: TList<TCep>;
-  Cep: TCep;
   UF, Cidade, Logradouro: string;
 begin
   if AEndereco.Trim = '' then

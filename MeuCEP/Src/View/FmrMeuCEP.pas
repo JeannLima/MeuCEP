@@ -14,18 +14,18 @@ uses
 type
   TMeuCepFrm = class(TForm)
     Panel1: TPanel;
-    DBGrid1: TDBGrid;
+    DBGridCeps: TDBGrid;
     Panel2: TPanel;
     BtnBuscar: TButton;
-    FDMemTable1: TFDMemTable;
-    DataSource1: TDataSource;
+    FDMemTable: TFDMemTable;
+    DataSource: TDataSource;
     EdtBuscar: TEdit;
-    FDMemTable1Logradouro: TStringField;
-    FDMemTable1Complemento: TStringField;
-    FDMemTable1Bairro: TStringField;
-    FDMemTable1Localidade: TStringField;
-    FDMemTable1UF: TStringField;
-    FDMemTable1CEP: TStringField;
+    FDMemTableLogradouro: TStringField;
+    FDMemTableComplemento: TStringField;
+    FDMemTableBairro: TStringField;
+    FDMemTableLocalidade: TStringField;
+    FDMemTableUF: TStringField;
+    FDMemTableCEP: TStringField;
     RadioGroupTipo: TRadioGroup;
     RadioGroupFormato: TRadioGroup;
     LbBuscar: TLabel;
@@ -59,10 +59,10 @@ begin
   Repo := TCepRepositoryImpl.Create(DmConexao.FDQuery);
   FCepController := TCepController.Create(Repo);
 
-  FDMemTable1.CreateDataSet;
+  FDMemTable.CreateDataSet;
 
-  DataSource1.DataSet := FDMemTable1;
-  DBGrid1.DataSource := DataSource1;
+  DataSource.DataSet := FDMemTable;
+  DBGridCeps.DataSource := DataSource;
 end;
 
 procedure TMeuCepFrm.FormShow(Sender: TObject);
@@ -220,7 +220,6 @@ begin
             try
               Lista.Free;
               Lista := FCepController.InserirEnderecoNoBanco(EdtBuscar.Text, Formato);
-              Lista := FCepController.BuscarNoBancoPorEndereco(EdtBuscar.Text);
 
               ShowMessage('Dados do Endereço inseridos com sucesso!');
             except
@@ -250,35 +249,35 @@ procedure TMeuCepFrm.PreencherGrid(const Lista: TList<TCep>);
 var
   Cep: TCep;
 begin
-  FDMemTable1.DisableControls;
+  FDMemTable.DisableControls;
   try
-    FDMemTable1.Close;
-    FDMemTable1.Open;
-    FDMemTable1.EmptyDataSet;
+    FDMemTable.Close;
+    FDMemTable.Open;
+    FDMemTable.EmptyDataSet;
 
     for Cep in Lista do
       begin
-        FDMemTable1.Append;
-        FDMemTable1.FieldByName('cep').AsString         := Cep.Cep;
-        FDMemTable1.FieldByName('logradouro').AsString  := Cep.Logradouro;
-        FDMemTable1.FieldByName('complemento').AsString := Cep.Complemento;
-        FDMemTable1.FieldByName('bairro').AsString      := Cep.Bairro;
-        FDMemTable1.FieldByName('localidade').AsString  := Cep.Localidade;
-        FDMemTable1.FieldByName('uf').AsString          := Cep.Uf;
-        FDMemTable1.Post;
+        FDMemTable.Append;
+        FDMemTable.FieldByName('cep').AsString         := Cep.Cep;
+        FDMemTable.FieldByName('logradouro').AsString  := Cep.Logradouro;
+        FDMemTable.FieldByName('complemento').AsString := Cep.Complemento;
+        FDMemTable.FieldByName('bairro').AsString      := Cep.Bairro;
+        FDMemTable.FieldByName('localidade').AsString  := Cep.Localidade;
+        FDMemTable.FieldByName('uf').AsString          := Cep.Uf;
+        FDMemTable.Post;
       end;
-    FDMemTable1.First;
+    FDMemTable.First;
 
     ContaQuantidadeRegistros;
 
   finally
-    FDMemTable1.EnableControls;
+    FDMemTable.EnableControls;
   end;
 end;
 
 procedure TMeuCepFrm.ContaQuantidadeRegistros;
 begin
-  QtdRegistros.Caption := FDMemTable1.RecordCount.ToString + ' Registros';
+  QtdRegistros.Caption := FDMemTable.RecordCount.ToString + ' Registros';
 end;
 
 end.

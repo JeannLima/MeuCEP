@@ -23,18 +23,19 @@ object MeuCepFrm: TMeuCepFrm
     BevelOuter = bvNone
     Caption = #39
     TabOrder = 0
-    object DBGrid1: TDBGrid
+    object DBGridCeps: TDBGrid
       AlignWithMargins = True
       Left = 5
-      Top = 54
+      Top = 58
       Width = 808
-      Height = 386
+      Height = 382
       Margins.Left = 5
       Margins.Top = 5
       Margins.Right = 5
       Margins.Bottom = 5
-      Align = alBottom
-      DataSource = DataSource1
+      Align = alClient
+      DataSource = DataSource
+      ReadOnly = True
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -161,11 +162,11 @@ object MeuCepFrm: TMeuCepFrm
       end
     end
   end
-  object DataSource1: TDataSource
+  object DataSource: TDataSource
     Left = 736
     Top = 120
   end
-  object FDMemTable1: TFDMemTable
+  object FDMemTable: TFDMemTable
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
     ResourceOptions.AssignedValues = [rvSilentMode]
@@ -173,26 +174,27 @@ object MeuCepFrm: TMeuCepFrm
     UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
+    ChangeAlertName = 'FDMemTable'
     Left = 736
     Top = 184
-    object FDMemTable1CEP: TStringField
+    object FDMemTableCEP: TStringField
       FieldName = 'CEP'
     end
-    object FDMemTable1Logradouro: TStringField
+    object FDMemTableLogradouro: TStringField
       FieldName = 'Logradouro'
       Size = 100
     end
-    object FDMemTable1Complemento: TStringField
+    object FDMemTableComplemento: TStringField
       FieldName = 'Complemento'
     end
-    object FDMemTable1Bairro: TStringField
+    object FDMemTableBairro: TStringField
       FieldName = 'Bairro'
     end
-    object FDMemTable1Localidade: TStringField
+    object FDMemTableLocalidade: TStringField
       FieldName = 'Localidade'
       Size = 100
     end
-    object FDMemTable1UF: TStringField
+    object FDMemTableUF: TStringField
       FieldName = 'UF'
     end
   end
